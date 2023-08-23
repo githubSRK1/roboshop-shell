@@ -33,18 +33,62 @@ VALIDATE $? "Setting up NPM Source"
 
 yum install nodejs -y &>>$LOGFILE
 
-VALIDATE $? "Installing Node JS"
+VALIDATE $? "Installing NodeJS"
 
-useradd roboshop
+#once the user is created, if you run this script 2nd time
+# this command will definiteily fail
+# IMPROVEMENT : first check the user already exist or not, if not exist then create
+useradd roboshop &>>$LOGFILE
 
-mkdir /app
+# write a condition to check directory already exists or not
+mkdir /app &>>$LOGFILE
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>>$LOGFILE
 
-cd /app 
+VALIDATE $? "Downloading catalogue artifact"
 
-unzip /tmp/catalogue.zip
+cd /app &>>$LOGFILE
 
-npm install 
+VALIDATE $? "Moving into app directory"
 
-cp catalogue.service /etc/systemd/system/catalogue.service
+unzip /tmp/catalogue.zip &>>$LOGFILE
+
+VALIDATE $? "unzipping catalogue"
+
+npm install &>>$LOGFILE
+
+VALIDATE $? "Installing dependencies"
+
+# give full path of catalogue.service  because we are inside /app
+cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>>$LOGFILE
+
+VALIDATE $? "copying catalogue.service"
+
+systemctl daemon-reload &>>$LOGFILE
+
+VALIDATE $? "daemon reload"
+
+systemctl enable catalogue &>>$LOGFILE
+
+VALIDATE $? "enabling catalogue"
+
+systemctl start catalogue &>>$LOGFILE
+
+VALIDATE $? "starting catalogue"
+
+cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOGFILE
+
+VALIDATE $? "Copying mongo repo"
+
+yum install mongodb-org-shell -y &>>$LOGFILE
+
+VALIDATE $? "Installing mongo client"
+
+mongo --host mongodb.devopsproject.cloud < /app/schema/catalogue.js &>>$LOGFILE
+
+VALIDATE $? "loading catalogue data into mongodb"
+
+
+
+
+
