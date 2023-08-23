@@ -35,8 +35,6 @@ useradd roboshop &>>$LOGFILE
 
 mkdir /app &>>$LOGFILE
 
-
-
 curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip &>>$LOGFILE
 
 VALIDATE $? "Downloading shipping artifact"
@@ -57,7 +55,7 @@ mv target/shipping-1.0.jar shipping.jar &>>$LOGFILE
 
 VALIDATE $? "renaming shipping jar"
 
-cp /home/centos/roboshop-shell /etc/systemd/system/shipping.service &>>$LOGFILE
+cp /home/centos/roboshop-shell/shipping.service /etc/systemd/system/shipping.service &>>$LOGFILE
 
 VALIDATE $? "copying shipping service"
 
