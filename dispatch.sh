@@ -39,7 +39,7 @@ mkdir /app &>>$LOGFILE
 
 VALIDATE $? "moving to app directory"
 
-curl -L -o /tmp/dispatch.zip https://roboshop-builds.s3.amazonaws.com/dispatch.zip &>>$LOGFILE
+curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip &>>$LOGFILE
 
 VALIDATE $? "downloading application code"
 
