@@ -35,7 +35,7 @@ VALIDATE $? "Installation of golang"
 
 VALIDATE $? "adding roboshop user"
 
-mkdir /app &>>$LOGFILE
+# mkdir /app &>>$LOGFILE
 
 VALIDATE $? "moving to app directory"
 
