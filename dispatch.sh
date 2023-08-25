@@ -31,7 +31,7 @@ yum install golang -y &>>$LOGFILE
 
 VALIDATE $? "Installation of golang"
 
-useradd roboshop &>>$LOGFILE
+# useradd roboshop &>>$LOGFILE
 
 VALIDATE $? "adding roboshop user"
 
