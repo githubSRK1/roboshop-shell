@@ -43,6 +43,10 @@ useradd roboshop &>>$LOGFILE
 # write a condition to check directory already exists or not
 mkdir /app &>>$LOGFILE
 
+cd /app &>>$LOGFILE
+
+VALIDATE $? "Moving into app directory"
+
 curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart.zip &>>$LOGFILE
 
 VALIDATE $? "Downloading cart artifact"
