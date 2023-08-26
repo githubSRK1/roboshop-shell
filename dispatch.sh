@@ -39,6 +39,10 @@ VALIDATE $? "adding roboshop user"
 
 VALIDATE $? "moving to app directory"
 
+cd /app &>>$LOGFILE
+
+VALIDATE $? "moving to app directory"
+
 curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip &>>$LOGFILE
 
 VALIDATE $? "downloading application code"
