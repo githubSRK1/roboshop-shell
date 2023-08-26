@@ -35,6 +35,10 @@ useradd roboshop &>>$LOGFILE
 
 mkdir /app &>>$LOGFILE
 
+cd /app &>>$LOGFILE
+
+VALIDATE $? "moving to app directory"
+
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping.zip &>>$LOGFILE
 
 VALIDATE $? "Downloading shipping artifact"
